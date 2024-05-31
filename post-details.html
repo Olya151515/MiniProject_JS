@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #a4d9fd;
+        }
+        .postBlock{
+            background-color: white;
+            width: 400px;
+            padding: 15px;
+            border-radius: 3px;
+            margin: 20px;
+        }
+        .commentsBlock{
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        .commentOne{
+            background-color: white;
+            width: 240px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .desc{
+            width: 190px;
+        }
+        h2{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Post description:</h2>
+<div class="postBlock"></div>
+<h2>Comments:</h2>
+<div class="commentsBlock"></div>
+<script>
+    let postBlock = document.getElementsByClassName('postBlock')[0];
+    let commentsBlock = document.getElementsByClassName('commentsBlock')[0];
+    let postId = localStorage.getItem('postId');
+
+    let baseURL = 'https://jsonplaceholder.typicode.com/posts';
+    let postsUrl = baseURL + '/'+postId;
+
+    let commentUrl = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
+    fetch(postsUrl)
+        .then(value =>value.json())
+        .then(post =>{
+            new Promise((res)=>{
+                let postContainer = document.createElement('div');
+                for (const key in post) {
+                    let div = document.createElement('div');
+                    div.innerHTML = `<strong>${key}</strong> : ${post[key]}`;
+                    postContainer.appendChild(div);
+                }
+                postBlock.appendChild(postContainer);
+                res();
+            })})
+        .then(value =>{return fetch(commentUrl)})
+        .then((value => value.json()))
+        .then(comments => {
+            for (const comment of comments) {
+                console.log(comment);
+                let commentContainer = document.createElement('div');
+                commentContainer.classList.add('commentOne')
+                for (const key in comment) {
+                    let divDesc = document.createElement('div');
+                    divDesc.classList.add('desc')
+                    divDesc.innerHTML=`<strong>${key}</strong>: ${comment[key]}`
+                    commentContainer.appendChild(divDesc);
+                }
+                commentsBlock.appendChild(commentContainer);
+            }
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #a4d9fd;
+        }
+        .usersBlock{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .containerUser{
+            border: 1px solid;
+            margin: 19px;
+            padding: 8px;
+            width: 500px;
+            height: 75px;
+            font-size: 20px;
+            border-radius: 2px;
+            background-color: #f6f1f1;
+        }
+        button{
+            margin: 0 0 0 440px;
+            height: 30px;
+            width: 60px;
+            background-color: #54de54;
+            font-size: 20px;
+            font-weight: 400;
+            border-radius: 4px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="usersBlock"></div>
+<script>
+    let usersBlock = document.getElementsByClassName('usersBlock')[0];
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(value => value.json())
+    .then(users =>{
+        for (const user of users) {
+            let userContainer = document.createElement('div');
+            userContainer.classList.add('containerUser');
+            userContainer.innerHTML=` <span><strong>Id</strong>:${user['id']}</span> <br>
+                                       <span><strong>Name</strong>: ${user['name']}</span> <br>`
+
+            let btn = document.createElement('button');
+            btn.innerHTML = ` <a href="user-details.html"> more</a>`;
+            userContainer.appendChild(btn);
+            usersBlock.appendChild(userContainer);
+            btn.addEventListener('click',() =>{
+                localStorage.setItem('id',user['id']);
+            })
+        }
+    })
+</script>
+</body>
+</html>
