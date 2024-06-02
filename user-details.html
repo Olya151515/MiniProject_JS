@@ -16,7 +16,10 @@
             padding: 15px;
             height: 430px;
             margin: 5px 20px;
-            border-radius: 3px;
+            border-radius: 6px;
+        }
+        .userBlock>div{
+            margin: 5px;
         }
         .flexBlock{
             display: flex;
@@ -26,13 +29,18 @@
             margin: 5px;
         }
         .divTitles{
+
             background-color: white;
-            width: 400px;
+            width: 500px;
             padding: 10px;
             margin: 5px;
+            border-radius: 6px;
+        }
+        .divTitles>div{
+            margin: 3px;
         }
         .btnPost{
-            margin: 0 0 0 290px;
+            margin: 4px 0 0 295px;
             height: 27px;
             width: 64px;
             background-color: #54de54;
@@ -43,12 +51,15 @@
         a{
             text-decoration: none;
             color: black;
+            font-size: 15px;
+            font-weight: 600;
         }
         .btnTitle{
             background-color: #54de54;
             border: 1px solid black;
             border-radius: 2px;
             margin: 2px;
+
 
         }
     </style>
@@ -107,7 +118,7 @@ fetch(userUrl)
                     divContainerTitles.classList.add('divTitles')
                     for (const post of posts) {
                         let divPostOne =document.createElement('div');
-                        divPostOne.innerHTML=`<strong> Title</strong>: ${post['title']}<br>`
+                        divPostOne.innerHTML=`<strong> Title</strong>:<br> ${post['title']}<br>`
 
                         let btnTitle = document.createElement('button');
                         btnTitle.classList.add('btnTitle');

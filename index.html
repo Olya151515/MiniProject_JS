@@ -21,7 +21,7 @@
             width: 500px;
             height: 75px;
             font-size: 20px;
-            border-radius: 2px;
+            border-radius: 6px;
             background-color: #f6f1f1;
         }
         button{
@@ -49,8 +49,8 @@
         for (const user of users) {
             let userContainer = document.createElement('div');
             userContainer.classList.add('containerUser');
-            userContainer.innerHTML=` <span><strong>Id</strong>:${user['id']}</span> <br>
-                                       <span><strong>Name</strong>: ${user['name']}</span> <br>`
+            userContainer.innerHTML=` <span> <strong> Id</strong>:${user['id']}</span> <br>
+                                       <span> <strong>Name</strong>: ${user['name']}</span> <br>`
 
             let btn = document.createElement('button');
             btn.innerHTML = ` <a href="user-details.html"> more</a>`;
